@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 @Module({
-  imports: [],
+  imports: [ServeStaticModule.],
   controllers: [AppController],
   providers: [AppService],
 })

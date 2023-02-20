@@ -1,0 +1,119 @@
+openapi: 3.0.0
+info:
+  description: "This API server of Pokedex App, written in GO"
+  version: 1.0.2
+  title: Pokedex
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: syauqilenterano@gmail.com
+tags:
+  - name: Auth
+    description: Everything about Authentication
+  - name: Pokemon
+    description: Pokemon management system
+  - name: User
+    description: Everything about user
+paths:
+  /auth:
+    post:
+      tags:
+        - Auth
+      description: Authentication API to get your jwt token, if payload only provide email the 
+      summary: Authentication for Pokedex
+      operationId: getJWTToken
+      requestBody:
+        $ref: "#/components/requestBodies/AuthReq"
+      responses:
+        "200":
+          $ref: '#/components/responses/AuthRes200'
+        "400":
+          $ref: '#/components/responses/BadRequestRes'
+        "500":
+          $ref: '#/components/responses/InternalServerRes'
+  /auth/guest:
+    get:
+      tags:
+        - Auth
+      description: This API will generate you a jwt token for guest
+      summary: Token for guest
+      responses:
+        "200":
+          $ref: '#/components/responses/AuthRes200'
+        "400":
+          $ref: '#/components/responses/BadRequestRes'
+        "500":
+          $ref: '#/components/responses/InternalServerRes'
+        
+servers:
+  - url: http://localhost:8080
+components:
+  requestBodies:
+    AuthReq:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                example: syauqilenterano@gmail.com
+              password:
+                type: string
+                example: Abcde_12345
+  responses:
+    AuthRes200:
+      description: Authentication succeed JWT token provided.
+      content:
+        application/json:
+          schema: 
+            $ref: "#/components/schemas/JWTToken"
+    BadRequestRes:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequest'
+    InternalServerRes:
+      description: Bad Request. check your payload..
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InternalServer'
+  schemas:
+    BadRequest:
+      type: object
+      properties:
+        code: 
+          type: number
+          example: 400
+        error:
+          type: string
+          example: "Bad Request: Payload vaidation error"
+    InternalServer:
+      type: object
+      properties:
+        code: 
+          type: number
+          example: 500
+        error:
+          type: string
+          example: "Internal Server Error"
+    JWTToken:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 200
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
