@@ -24,4 +24,10 @@ export class User extends Model<User> {
         allowNull: false,
     })
     gender: string;
+
+    @Column({
+        type: DataType.ENUM,
+        values: ['admin','user']
+    })
+    role: string
 }
