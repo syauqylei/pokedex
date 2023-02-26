@@ -14,6 +14,23 @@ tags:
   - name: User
     description: Everything about user
 paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      description: Register user use this API
+      summary: Register User
+      operationId: registerAccount
+      requestBody:
+        $ref: "#/components/requestBodies/RegisterReq"
+      responses:
+        "200":
+          $ref: "#/components/responses/OKRes"
+        "400":
+          $ref: '#/components/responses/BadRequestRes'
+        "500":
+          $ref: '#/components/responses/InternalServerRes'
+
   /auth:
     post:
       tags:
@@ -43,24 +60,64 @@ paths:
           $ref: '#/components/responses/BadRequestRes'
         "500":
           $ref: '#/components/responses/InternalServerRes'
-        
+  /monsters:
+    post: 
+      tags:
+        - Pokemon
+      description: API manages pokemon add
+      summary: add pokemon
+      operationId: addPokemon
+      requestBody:
+        $ref: "#/components/requestBodies/AddPokemon"
+      responses:
+        "200":
+          $ref: '#/components/responses/OKRes'
+        "400":
+          $ref: '#/components/responses/BadRequestRes'
+        "401":
+          $ref: '#/components/responses/UnauthorizedRes'
+        "403":
+          $ref: '#/components/responses/ForbiddenRes'
+        "500":
+          $ref: '#/components/responses/InternalServerRes'
 servers:
-  - url: http://localhost:8080
+  - url: http://localhost:8080/api/v1
 components:
   requestBodies:
+    RegisterReq:
+      content:
+        application/json:
+          schema: 
+            type: object
+            properties:
+              username: 
+                type: string
+                example: karessian1
+              email:
+                type: string
+                example: mail@gmail.com
+              password:
+                type: string
+                example: sscurePassword
     AuthReq:
       content:
         application/json:
           schema:
             type: object
             properties:
-              email:
+              username:
                 type: string
-                example: syauqilenterano@gmail.com
+                example: karessian1
               password:
                 type: string
                 example: Abcde_12345
   responses:
+    OKRes:
+      description: Request is success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OK'
     AuthRes200:
       description: Authentication succeed JWT token provided.
       content:
@@ -79,7 +136,50 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/InternalServer'
+    UnauthorizedRes:
+      description: Unauthorized. check your token
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schema/Unauthorized'
   schemas:
+    Unauthorized: 
+      type: object
+      properties:
+        code:
+          type: number
+          example: 401
+        error:
+          type: string
+          example: "Unauthorized. Your authentication failed"
+    Forbidden:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 403
+        error:
+          type: string
+          example: "Forbidden. You're not authorized to do this operation"
+    NotFound:
+      type: object
+      properties:
+        code:
+          type: number
+          example: 404
+        error:
+          type: string
+          example: "Not Found. the resource you requested is not found"
+
+    OK: 
+      type: object
+      properties:
+        code:
+          type: number
+          example: 200
+        message:
+          type: string
+          example: Request is successs
     BadRequest:
       type: object
       properties:
