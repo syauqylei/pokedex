@@ -1,38 +1,37 @@
-import { ArrayNotEmpty, IsNotEmpty, Min } from "class-validator"
-import { Max } from "sequelize-typescript"
+import { ArrayNotEmpty, IsNotEmpty, Min, Max } from 'class-validator';
 
 export class CreateMonsterDto {
-    @IsNotEmpty()
-    name: string
+  @IsNotEmpty()
+  name: string;
 
-    @IsNotEmpty()
-    summary: string
+  @IsNotEmpty()
+  summary: string;
 
-    @IsNotEmpty()
-    description: string
-    
-    @ArrayNotEmpty()
-    category: string[]
+  @IsNotEmpty()
+  description: string;
 
-    @Min(0)
-    height: number
-    
-    @Min(0)
-    weight: number
+  @ArrayNotEmpty()
+  category: string[];
 
-    @Max(500)
-    @Min(0)
-    health: number
+  @Min(0)
+  height: number;
 
-    @Max(500)
-    @Min(0)
-    attack: number
+  @Min(0)
+  weight: number;
 
-    @Max(500)
-    @Min(0)
-    defense: number
-    
-    @Max(500)
-    @Min(0)
-    speed: number
+  @Max(500)
+  @Min(0)
+  health: number;
+
+  @Max(500)
+  @Min(0)
+  attack: number;
+
+  @Max(500)
+  @Min(0)
+  defense: number;
+
+  @Max(500)
+  @Min(0)
+  speed: number;
 }

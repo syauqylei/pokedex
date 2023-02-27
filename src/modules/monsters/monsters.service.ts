@@ -1,10 +1,11 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { queryBuilder } from '../../core/utils';
 import { MONSTER_REPOSITORY } from '../../core/constants';
 import { CreateMonsterDto } from './dto/create-monster.dto';
 import { UpdateMonsterDto } from './dto/update-monster.dto';
 import { Monster } from './entities/monster.entity';
 import { QueryOptions } from './monsters.interfaces';
+import { validate } from 'class-validator';
 
 @Injectable()
 export class MonstersService {
@@ -19,20 +20,33 @@ export class MonstersService {
 
   async findAll(opt: QueryOptions) {
     const queryOpt = queryBuilder(opt);
-    console.log(queryOpt);
     const ret = await this.monsterRepository.findAll(queryOpt);
     return ret;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} monster`;
+  async findOne(id: string) {
+    const monster = await this.monsterRepository.findByPk(id);
+    if (!monster) {
+      throw new NotFoundException('Pokemon is not found');
+    }
+    return monster;
   }
 
-  update(id: number, updateMonsterDto: UpdateMonsterDto) {
-    return `This action updates a #${id} monster`;
+  async update(id: string, updateMonsterDto: UpdateMonsterDto) {
+    const monster = await this.monsterRepository.findByPk(id);
+    if (!monster) {
+      throw new NotFoundException('Pokemon is not found');
+    }
+    await monster.update(updateMonsterDto);
+    return { success: true, id };
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} monster`;
+  async remove(id: string) {
+    const monster = await this.monsterRepository.findByPk(id);
+    if (!monster) {
+      throw new NotFoundException('Pokemon is not found');
+    }
+    await monster.destroy({ force: true });
+    return { success: true, id };
   }
 }
