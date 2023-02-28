@@ -5,7 +5,7 @@ import {
   Model,
   BelongsToMany,
 } from 'sequelize-typescript';
-import { User } from 'src/modules/users/user.entity';
+import { User } from '../../../modules/users/user.entity';
 
 @Table
 export class Monster extends Model<Monster> {

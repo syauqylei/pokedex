@@ -26,6 +26,7 @@ describe('UsersService', () => {
                 id: '83777298-686c-4460-9293-60b91116d828',
               };
             }),
+            create: jest.fn().mockResolvedValue(UserStub())
           },
         },
         {

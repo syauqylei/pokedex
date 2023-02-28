@@ -70,4 +70,9 @@ export class UserMonster extends Model<UserMonster> {
     allowNull: false,
   })
   monsterId: string;
+
+  @Column({
+    type: DataType.BOOLEAN,
+  })
+  catched: boolean;
 }

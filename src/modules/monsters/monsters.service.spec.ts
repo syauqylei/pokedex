@@ -28,11 +28,7 @@ describe('MonstersService', () => {
               return pokemon;
             }),
             findAll: jest.fn().mockImplementation((opt: any) => {
-              if (opt.limit && opt.itemsPerPage) {
-                return new Array(opt.itemsPerPage).fill(PokemonStub());
-              } else if (opt.limit) {
-                return new Array(opt.limit).fill(PokemonStub());
-              }
+              return [PokemonStub()]
             }),
             findByPk: jest.fn().mockImplementation((id) => {
               if (id === '4e3cee99-ddc0-4aab-b224-ea9614ca5a10') {
@@ -81,30 +77,21 @@ describe('MonstersService', () => {
     });
   });
 
-  // it('should limit returns pokemon to default 10', async () => {
-  //   let res;
-  //   let err;
-  //   try {
-  //     res = await service.findAll({});
-  //   } catch (error) {
-  //     err = error;
-  //   }
+  describe('Testing getPokemons', () => {
+    it('should return category', async () => {
+      let res;
+      let err;
+      const userId = '4e3cee99-ddc0-4aab-b224-ea9614ca5a10';
+      try {
+        res = await service.getMonsters(userId);
+      } catch (error) {
+        err = error
+      }
+      expect(err).toBeUndefined();
+      expect(res).toHaveLength(1)
+    })
+  })
 
-  //   expect(err).toBeUndefined();
-  //   expect(res).toHaveLength(10);
-  // });
-
-  // it('should limit returns pokemon to default 10', async () => {
-  //   let res;
-  //   let err;
-  //   try {
-  //     res = await service.findAll({ page: 2, itemsPerPage: 5 });
-  //   } catch (error) {
-  //     err = error;
-  //   }
-  //   expect(err).toBeUndefined();
-  //   expect(res).toHaveLength(5);
-  // });
   describe('Testing remove', () => {
     it('should throw NotFound when id is not found', async () => {
       let res;

@@ -22,7 +22,13 @@ export class UsersService {
   async create(user: UserDto): Promise<User> {
     return await this.userRepository.create<User>(user);
   }
+  async findOneByEmail(email: string): Promise<User> {
+      return await this.userRepository.findOne<User>({ where: { email } });
+  }
 
+  async findOneById(id: number): Promise<User> {
+      return await this.userRepository.findOne<User>({ where: { id } });
+  }
   async toggleMarkCatch(id: string, monsterId: string) {
     const monster = await this.monsterRepository.findByPk(monsterId);
     if (!monster) {
@@ -31,6 +37,7 @@ export class UsersService {
     const createUserMonster = {
       userId: id,
       monsterId,
+      cathed: true,
     };
     const userMonster = await this.userMonsterRepository.create(
       createUserMonster,
