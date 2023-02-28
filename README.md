@@ -31,7 +31,7 @@ Here is the pokedex api. This api manages pokedex with al
 ## Tech Stacks
 
 - NestJS
-- Postgresql
+- Postgresql: Use postgresql because is free and opensource and needs to be a user spesific data for catched pokemons that relate to pokemon tables. Thats why relations database is used
 - Sequelize
 
 ## ERD
