@@ -1,4 +1,4 @@
-import { Injectable, Inject, BadRequestException } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 
 import { User, UserMonster } from './user.entity';
 import { UserDto } from './dto/user.dto';
@@ -29,23 +29,5 @@ export class UsersService {
   async findOneById(id: number): Promise<User> {
       return await this.userRepository.findOne<User>({ where: { id } });
   }
-  async toggleMarkCatch(id: string, monsterId: string) {
-    const monster = await this.monsterRepository.findByPk(monsterId);
-    if (!monster) {
-      throw new BadRequestException('MonsterId is not found');
-    }
-    const createUserMonster = {
-      userId: id,
-      monsterId,
-      cathed: true,
-    };
-    const userMonster = await this.userMonsterRepository.create(
-      createUserMonster,
-    );
-    return {
-      success: true,
-      userId: userMonster.userId,
-      monsterId: userMonster.monsterId,
-    };
-  }
+ 
 }

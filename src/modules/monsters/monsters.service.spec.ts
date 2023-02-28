@@ -1,10 +1,9 @@
 import {
-  BadGatewayException,
   BadRequestException,
   NotFoundException,
 } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { MONSTER_REPOSITORY } from '../../core/constants';
+import { MONSTER_REPOSITORY, USER_MONSTER_REPOSITORY } from '../../core/constants';
 import { MonstersService } from './monsters.service';
 import { PokemonStub } from './monsters.stub';
 
@@ -34,10 +33,24 @@ describe('MonstersService', () => {
               if (id === '4e3cee99-ddc0-4aab-b224-ea9614ca5a10') {
                 return null;
               }
+              if (id === '13777298-686c-4460-9293-60b91116d827') {
+                return null
+              }
               return {
                 ...PokemonStub(),
                 destroy: jest.fn().mockResolvedValue(null),
                 update: jest.fn().mockResolvedValue(null),
+              };
+            }),
+          },
+        },
+        {
+          provide: USER_MONSTER_REPOSITORY,
+          useValue: {
+            create: jest.fn().mockImplementation((id) => {
+              return {
+                userId: '83777298-686c-4460-9293-60b91116d828',
+                monsterId: '13777298-686c-4460-9293-60b91116d828',
               };
             }),
           },
@@ -174,6 +187,33 @@ describe('MonstersService', () => {
       }
       expect(err).toBeUndefined();
       expect(res.name).toEqual(PokemonStub().name);
+    });
+  });
+   describe('Testing toggle mark catched monster', () => {
+    it('should throw error when not found monster id', async () => {
+      let err;
+      let res;
+      const userId = '83777298-686c-4460-9293-60b91116d827';
+      const monsterId = '13777298-686c-4460-9293-60b91116d827';
+      try {
+        res = await service.toggleMarkCatch(userId, monsterId);
+      } catch (error) {
+        err = error;
+      }
+      expect(err).toBeInstanceOf(BadRequestException);
+    });
+    it('should return success', async () => {
+      let err;
+      let res;
+      const userId = '83777298-686c-4460-9293-60b91116d827';
+      const monsterId = '13777298-686c-4460-9293-60b91116d828';
+      try {
+        res = await service.toggleMarkCatch(userId, monsterId);
+      } catch (error) {
+        err = error;
+      }
+      expect(err).toBeUndefined();
+      expect(res.success).toEqual(true);
     });
   });
 });

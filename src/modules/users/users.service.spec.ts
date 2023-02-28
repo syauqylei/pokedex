@@ -71,31 +71,5 @@ describe('UsersService', () => {
     expect(err).toBeUndefined();
     expect(res.username).toEqual(stub.username);
   });
-  describe('Testing toggle mark catched monster', () => {
-    it('should throw error when not found monster id', async () => {
-      let err;
-      let res;
-      const userId = '83777298-686c-4460-9293-60b91116d827';
-      const monsterId = '13777298-686c-4460-9293-60b91116d827';
-      try {
-        res = await service.toggleMarkCatch(userId, monsterId);
-      } catch (error) {
-        err = error;
-      }
-      expect(err).toBeInstanceOf(BadRequestException);
-    });
-    it('should return success', async () => {
-      let err;
-      let res;
-      const userId = '83777298-686c-4460-9293-60b91116d827';
-      const monsterId = '13777298-686c-4460-9293-60b91116d828';
-      try {
-        res = await service.toggleMarkCatch(userId, monsterId);
-      } catch (error) {
-        err = error;
-      }
-      expect(err).toBeUndefined();
-      expect(res.success).toEqual(true);
-    });
-  });
+ 
 });
