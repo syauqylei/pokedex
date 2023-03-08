@@ -22,7 +22,7 @@ This API server of Pokedex App, written in GO
 
 Base URLs:
 
-* <a href="http://localhost:8080/api/v1">http://localhost:8080/api/v1</a>
+* <a href="http://localhost:3000/api/v1">http://localhost:3000/api/v1</a>
 
 <a href="http://swagger.io/terms/">Terms of service</a>
 Email: <a href="mailto:syauqilenterano@gmail.com">Support</a> 
@@ -48,7 +48,7 @@ const headers = {
   'Accept':'application/json'
 };
 
-fetch('http://localhost:8080/api/v1/auth/register',
+fetch('http://localhost:3000/api/v1/auth/register',
 {
   method: 'POST',
   body: inputBody,
@@ -126,7 +126,7 @@ const headers = {
   'Accept':'application/json'
 };
 
-fetch('http://localhost:8080/api/v1/auth',
+fetch('http://localhost:3000/api/v1/auth',
 {
   method: 'POST',
   body: inputBody,
@@ -196,7 +196,7 @@ const headers = {
   'Accept':'application/json'
 };
 
-fetch('http://localhost:8080/api/v1/auth/guest',
+fetch('http://localhost:3000/api/v1/auth/guest',
 {
   method: 'GET',
 
@@ -258,7 +258,7 @@ const headers = {
   'Accept':'application/json'
 };
 
-fetch('http://localhost:8080/api/v1/monsters',
+fetch('http://localhost:3000/api/v1/monsters',
 {
   method: 'POST',
   body: inputBody,
