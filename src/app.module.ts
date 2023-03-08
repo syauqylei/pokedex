@@ -5,11 +5,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './core/database/database.module';
 import { MonstersModule } from './modules/monsters/monsters.module';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
-  imports: [ServeStaticModule.forRoot({
+  imports: [
+    ServeStaticModule.forRoot({
     rootPath: join(__dirname,'../src','docs')
-  }), DatabaseModule, MonstersModule],
+    }),
+    MonstersModule,
+    UsersModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

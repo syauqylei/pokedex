@@ -2,8 +2,8 @@ import { Sequelize } from 'sequelize-typescript';
 
 import { SEQUELIZE, DEVELOPMENT, TEST, PRODUCTION } from '../constants';
 import { databaseConfig } from './database.config';
-import { User } from '../../modules/users/user.entity';
-import { Monster } from 'src/modules/monsters/entities/monster.entity';
+import { User, UserMonster } from '../../modules/users/user.entity';
+import { Monster } from '../../modules/monsters/entities/monster.entity';
 
 export const databaseProviders = [
     {
@@ -24,7 +24,7 @@ export const databaseProviders = [
                     config = databaseConfig.development;
             }
             const sequelize = new Sequelize(config);
-            sequelize.addModels([User,Monster]);
+            sequelize.addModels([User,Monster,UserMonster]);
             await sequelize.sync();
             return sequelize;
         },

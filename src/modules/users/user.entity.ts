@@ -49,6 +49,7 @@ export class User extends Model<User> {
   monsters: Monster[];
 }
 
+@Table
 export class UserMonster extends Model<UserMonster> {
   @Column({
     type: DataType.UUIDV4,

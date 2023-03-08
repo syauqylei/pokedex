@@ -3,7 +3,7 @@ import { Monster } from 'src/modules/monsters/entities/monster.entity';
 import { QueryOptions } from '../modules/monsters/monsters.interfaces';
 import { DEFAULT_ITEMS_PER_PAGE } from './constants';
 
-export const queryBuilder = (opt: QueryOptions): FindOptions<Monster> => {
+export const queryBuilder = (opt: QueryOptions)=> {
   const { page, itemsPerPage } = opt;
   const filter = {};
   if (!page) {

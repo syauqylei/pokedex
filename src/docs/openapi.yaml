@@ -84,6 +84,15 @@ servers:
   - url: http://localhost:8080/api/v1
 components:
   requestBodies:
+    AddPokemon:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name: 
+                type: string
+                example: psyduck
     RegisterReq:
       content:
         application/json:
@@ -130,6 +139,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/BadRequest'
+    ForbiddenRes:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequest'
     InternalServerRes:
       description: Bad Request. check your payload..
       content:
@@ -141,7 +156,7 @@ components:
       content:
         application/json:
           schema: 
-            $ref: '#/components/schema/Unauthorized'
+            $ref: '#/components/schemas/Unauthorized'
   schemas:
     Unauthorized: 
       type: object

@@ -5,7 +5,7 @@ import {
   Model,
   BelongsToMany,
 } from 'sequelize-typescript';
-import { User } from '../../../modules/users/user.entity';
+import { User, UserMonster } from '../../../modules/users/user.entity';
 
 @Table
 export class Monster extends Model<Monster> {
@@ -63,6 +63,6 @@ export class Monster extends Model<Monster> {
   })
   speed: number;
 
-  @BelongsToMany(() => User, () => Monster)
+  @BelongsToMany(() => User, () => UserMonster)
   users: User[];
 }
