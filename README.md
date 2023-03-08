@@ -26,7 +26,7 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-Here is the pokedex api. This api manages pokedex with al
+Here is the pokedex api. An api spesification is provided [here](./Docs.md)
 
 ## Tech Stacks
 
