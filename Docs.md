@@ -1,9 +1,9 @@
 ---
 title: Pokedex v1.0.2
 language_tabs:
-  - js: javascript
+  - javascript: Javascript
 language_clients:
-  - js: ""
+  - javascript: ""
 toc_footers: []
 includes: []
 search: true
@@ -36,6 +36,31 @@ Everything about Authentication
 <a id="opIdregisterAccount"></a>
 
 > Code samples
+
+```javascript
+const inputBody = '{
+  "username": "karessian1",
+  "email": "mail@gmail.com",
+  "password": "sscurePassword"
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json'
+};
+
+fetch('http://localhost:8080/api/v1/auth/register',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
 
 `POST /auth/register`
 
@@ -91,6 +116,30 @@ This operation does not require authentication
 
 > Code samples
 
+```javascript
+const inputBody = '{
+  "username": "karessian1",
+  "password": "Abcde_12345"
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json'
+};
+
+fetch('http://localhost:8080/api/v1/auth',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
 `POST /auth`
 
 *Authentication for Pokedex*
@@ -141,6 +190,26 @@ This operation does not require authentication
 
 > Code samples
 
+```javascript
+
+const headers = {
+  'Accept':'application/json'
+};
+
+fetch('http://localhost:8080/api/v1/auth/guest',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
 `GET /auth/guest`
 
 *Token for guest*
@@ -179,6 +248,29 @@ Pokemon management system
 <a id="opIdaddPokemon"></a>
 
 > Code samples
+
+```javascript
+const inputBody = '{
+  "name": "psyduck"
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json'
+};
+
+fetch('http://localhost:8080/api/v1/monsters',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
 
 `POST /monsters`
 
